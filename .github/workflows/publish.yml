@@ -5,6 +5,7 @@ on:
   schedule:
     # minute hour dom month dow
     - cron: 20 10 1-7 * 1
+  workflow_dispatch:
 
 permissions:
   id-token: write
