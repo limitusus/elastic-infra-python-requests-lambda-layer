@@ -29,6 +29,7 @@ jobs:
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ap-northeast-1
+          role-to-assume: arn:aws:iam::454803268926:role/PythonRequestsLambdaLayerReleaser
       - run: |
           aws lambda publish-layer-version \
           --layer-name python-requests-layer-$PYTHON_VERSION \
