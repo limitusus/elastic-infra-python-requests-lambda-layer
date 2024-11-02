@@ -1,0 +1,29 @@
+name: Publish Lambda Layer
+run-name: ${{ github.actor }} is deploying Lambda Layer of requests
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  Publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          architecture: 'x64'
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+      - run: cd layer && ./1_install.sh
+      - run: cd layer && ./2-package.sh
+      - uses: aws-actions/configure-aws-credentials@v4
+      - run: |
+          aws lambda publish-layer-version \
+          --layer-name python-requests-layer-$PYTHON_VERSION \
+          --zip-file fileb://layer/layer_content.zip \
+          --compatible-runtimes python$PYTHON_VERSION \
+          --compatible-architectures "x86_64"
