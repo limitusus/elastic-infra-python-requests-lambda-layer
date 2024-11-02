@@ -1,6 +1,11 @@
 name: Publish Lambda Layer
 run-name: ${{ github.actor }} is deploying Lambda Layer of requests
 
+on:
+  schedule:
+    # minute hour dom month dow
+    - cron: 20 10 1-7 * 1
+
 permissions:
   id-token: write
   contents: read
