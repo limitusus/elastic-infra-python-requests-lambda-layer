@@ -34,5 +34,5 @@ jobs:
           aws lambda publish-layer-version \
           --layer-name python-requests-layer-$PYTHON_VERSION \
           --zip-file fileb://layer/layer_content.zip \
-          --compatible-runtimes python$PYTHON_VERSION \
+          --compatible-runtimes python3.9 python3.10 python3.11 python3.12 \
           --compatible-architectures "x86_64"
